@@ -33,7 +33,6 @@ public class MailAndNumber {
 		
 		for (String s: tlds) {
 			if (domainExtension.contains(s.toLowerCase())) {
-				System.out.println(s);
 				return true;
 			}
 		}  return false;
@@ -49,9 +48,4 @@ public class MailAndNumber {
 		} else return false;
 	}
 	
-	public static void main(String[] args) {
-		MailAndNumber obj = new MailAndNumber();
-		System.out.println(obj.legitDomain("admin@fbi.ov"));
-	}
-
 }

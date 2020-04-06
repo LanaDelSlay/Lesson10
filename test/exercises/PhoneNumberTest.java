@@ -1,5 +1,6 @@
 package exercises;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,11 +20,11 @@ import org.junit.jupiter.api.Test;
 		
 		@Test
 		void testMail() {
-			String emails[] = {"gmiller1902@gmail.com", "admin@fbi.ov", "random@website.net", "snoopdog@cox.edu"};
+			String emails[] = {"gmiller1902@gmail.com", "admin@fbi.gov", "random@website.net", "snoopdog@cox.edu"};
 			for (String s: emails) {
 				assertTrue(mnn.verifyMail(s));
 			}
 		}
-
-
+		
+		
 }
