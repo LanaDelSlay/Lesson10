@@ -19,5 +19,10 @@ class EncryptorTest {
 	
 	// Exercise: decrypt this sentence: Nkxg"nqpi"cpf"rtqurgt#
 	
+	@Test
+	void testDecryption () {
+		Encryptor e = new Encryptor();
+		e.decrypt("Nkxg\"nqpi\"cpf\"rtqurgt#");
+	}
 	
 }

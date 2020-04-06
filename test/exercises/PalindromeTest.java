@@ -14,7 +14,15 @@ class PalindromeTest {
 	}
 	
 	// 2. Test that a word exists in the dictionary 
-	
+	@Test
+	void testExist() {
+		assertTrue(testPalindrome.exists("Graham"));
+	}
 	// 3. Test that a word is a palindrome
-
+	
+	@Test
+	void testPalindrome() {
+		assertTrue(testPalindrome.isPalin("Tacocat"));
+	}
+		
 }

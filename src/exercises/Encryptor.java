@@ -12,5 +12,15 @@ public class Encryptor {
 		}
 		return builder.toString();
 	}
+	
+	public String decrypt(String word) {
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < word.length(); i++) {
+			int numericalValue = word.charAt(i);
+			numericalValue-=2;
+			builder.append((char) numericalValue);
+			System.out.println(builder.toString());
+		} return builder.toString();
+	}
 
 }

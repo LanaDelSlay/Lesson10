@@ -4,6 +4,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.Stack;
 
 import javax.sound.sampled.AudioInputStream;
@@ -13,9 +15,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import examples.FileHelper;
+
 public class Hangman extends KeyAdapter {
 
 	Stack<String> puzzles = new Stack<String>();
+	List<String> words = FileHelper.loadFileContentsIntoArrayList("resource/words.txt");
 	ArrayList<JLabel> boxes = new ArrayList<JLabel>();
 	int lives = 9;
 	JLabel livesLabel = new JLabel("" + lives);
@@ -23,15 +28,16 @@ public class Hangman extends KeyAdapter {
 	public static void main(String[] args) {
 		Hangman hangman = new Hangman();
 		hangman.addPuzzles();
+		hangman.addPuzzles();
 		hangman.createUI();
 	}
 
 	private void addPuzzles() {
-		puzzles.push("defenestrate");
-		puzzles.push("fancypants");
-		puzzles.push("elements");
+		puzzles.add(getRandomWord(words));
+		getRandomWord(words);
 	}
 
+	
 	JPanel panel = new JPanel();
 	private String puzzle;
 
@@ -50,6 +56,7 @@ public class Hangman extends KeyAdapter {
 	private void loadNextPuzzle() {
 		removeBoxes();
 		lives = 9;
+		addPuzzles();
 		livesLabel.setText("" + lives);
 		puzzle = puzzles.pop();
 		System.out.println("puzzle is now " + puzzle);
@@ -68,9 +75,12 @@ public class Hangman extends KeyAdapter {
 	private void updateBoxesWithUserInput(char keyChar) {
 		boolean gotOne = false;
 		for (int i = 0; i < puzzle.length(); i++) {
-			if (puzzle.charAt(i) == keyChar) {
+			if (puzzle.toLowerCase().charAt(i) == keyChar) {
 				boxes.get(i).setText("" + keyChar);
 				gotOne = true;
+				if (!boxes.toString().contains("_")) {
+					loadNextPuzzle();
+				}
 			}
 		}
 		if (!gotOne)
@@ -92,20 +102,21 @@ public class Hangman extends KeyAdapter {
 		boxes.clear();
 	}
 	
+	public String getRandomWord(List<String> words) 
+    { 
+        Random rand = new Random(); 
+        return words.get(rand.nextInt(words.size())); 
+    } 
+	
 	public void playDeathKnell() {
 		try {
 			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("resource/funeral-march.wav"));
 			Clip clip = AudioSystem.getClip();
 			clip.open(audioInputStream);
 			clip.start();
-			Thread.sleep(8400);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
 
 }
-
-
-
-
