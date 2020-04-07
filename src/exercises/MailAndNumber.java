@@ -9,6 +9,7 @@ import examples.FileHelper;
 public class MailAndNumber {
 
 	List<String> tlds = FileHelper.loadFileContentsIntoArrayList("resource/tlds.txt");
+	Pattern pattern = Pattern.compile("^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$");
 	
 	public boolean verifyMail(String email) {
 		
@@ -38,8 +39,6 @@ public class MailAndNumber {
 		}  return false;
 		
 	}
-	
-	Pattern pattern = Pattern.compile("^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$");
 	
 	public boolean verifyNumber(String number) {
 		Matcher matcher = pattern.matcher(number);

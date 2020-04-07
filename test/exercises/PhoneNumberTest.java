@@ -20,8 +20,6 @@ import org.junit.jupiter.api.Test;
 			String emails[] = {"gmiller1902@gmail.com", "admin@fbi.gov", "random@website.net", "snoopdog@cox.edu"};
 			for (String s: emails) {
 				assertTrue(mnn.verifyMail(s));
-			}
 		}
-		
-		
+	}
 }
